@@ -1,6 +1,5 @@
 package Classes;
 
-import java.util.*;
 
 public class Usuario {
 	
@@ -53,6 +52,14 @@ public class Usuario {
 	  public char getSexo() {
 		  return sexo;
 	  }
+	  
+	  //metodo toSTRING
+	  @Override
+	  public String toString() {
+		  return "Usuario [ codigo =  " + codigo +",login = "+ login + ", senha = "+senha+",sexo ="+sexo+"]";
+	  }
+	  
+	    
 	  
 	 
 }
