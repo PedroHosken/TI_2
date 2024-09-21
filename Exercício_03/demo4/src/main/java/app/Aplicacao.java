@@ -12,7 +12,7 @@ public class Aplicacao {
         port(6789);
         
         staticFiles.location("/public");
-        
+
         post("/produto/insert", (request, response) -> produtoService.insert(request, response));
 
         get("/produto/:id", (request, response) -> produtoService.get(request, response));

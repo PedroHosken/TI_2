@@ -1,0 +1,124 @@
+<html>
+
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+    <title>Controle de Estoque</title>
+</head>
+
+<script type="text/javascript">
+    function confirmarDeleteProduto(id, descricao, preco) {
+        if (confirm('Confirmar a exclusão do produto [' + descricao + '] (ID ' + id + ') com preço R$ ' + preco)) {
+            location.href = '/produto/delete/' + id;
+        }
+    }
+
+    function onLoad() {
+        if (document.getElementById("msg").value != "") {
+            alert(document.getElementById("msg").value);
+        }
+    }
+</script>
+
+<body onload="onLoad()">
+    <h1>Controle de Estoque</h1>
+    <input type="hidden" id="msg" name="msg" value="">
+
+    <!-- Formulário para Inserir Produto -->
+    <section class="section--container__responsive">
+        <section class="section--mainrow__responsive first section">
+            <h2 class="generaltext">Inserir Produto</h2>
+            <form class="form--register" action="http://localhost:6789/produto/insert" method="post" id="form-add">
+                <p>Descrição:</p>
+                <input class="input--register" type="text" name="descricao" placeholder="leite, pão..." required>
+                <p>Preço:</p>
+                <input class="input--register" type="text" name="preco" placeholder="Ex: 9.99" required>
+                <p>Quantidade:</p>
+                <input class="input--register" type="text" name="quantidade" placeholder="Ex: 10" required>
+                <p>Data de Fabricação:</p>
+                <input class="input--register" type="date" name="dataFabricacao" required>
+                <p>Data de Validade:</p>
+                <input class="input--register" type="date" name="dataValidade" required>
+                <br>
+                <input type="submit" class="input--button" value="Inserir Produto">
+            </form>
+        </section>
+    </section>
+
+    <!-- Lista de Produtos -->
+    <section>
+        <h2 class="generaltext">Lista de Produtos</h2>
+        <table border="1">
+            <tr>
+                <th>ID</th>
+                <th>Descrição</th>
+                <th>Preço</th>
+                <th>Quantidade</th>
+                <th>Data de Fabricação</th>
+                <th>Data de Validade</th>
+                <th>Ações</th>
+            </tr>
+            <!-- Aqui, você pode fazer um loop para listar os produtos usando algum template engine -->
+            <tr>
+                <td>1</td>
+                <td>Leite</td>
+                <td>R$ 5.00</td>
+                <td>20</td>
+                <td>2023-09-21</td>
+                <td>2024-09-21</td>
+                <td>
+                    <a href="/produto/update/1">Editar</a> |
+                    <a href="javascript:confirmarDeleteProduto(1, 'Leite', 5.00)">Excluir</a>
+                </td>
+            </tr>
+            <!-- Repetir estrutura acima para outros produtos -->
+        </table>
+    </section>
+
+    <!-- Estilo -->
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: white;
+        }
+
+        .input--button {
+            font-weight: bold;
+            font-family: Arial;
+            font-size: medium;
+            border-color: transparent;
+            display: block;
+            margin: 10px auto;
+            color: white;
+            background-color: #00FF00;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .input--register {
+            display: inline-block;
+            width: 100%;
+            border-radius: 7px;
+            padding: 10px;
+            border: 1px solid lightgray;
+            margin-bottom: 10px;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+</body>
+
+</html>

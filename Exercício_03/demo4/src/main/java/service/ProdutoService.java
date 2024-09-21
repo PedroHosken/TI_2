@@ -3,12 +3,15 @@ package service;
 import java.util.Scanner;
 import java.time.LocalDate;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
 import java.util.List;
 import dao.ProdutoDAO;
 import model.Produto;
 import spark.Request;
 import spark.Response;
+import java.io.InputStream;
+import java.io.FileNotFoundException;
 
 public class ProdutoService {
 
@@ -34,10 +37,15 @@ public class ProdutoService {
 	}
 
 	public void makeForm(int tipo, Produto produto, int orderBy) {
-		String nomeArquivo = "form.html";
+		String nomeArquivo = "/public/form.html";
 		form = "";
 		try {
-			Scanner entrada = new Scanner(new File(nomeArquivo));
+			// Usar ClassLoader para carregar o arquivo a partir dos recursos
+			InputStream is = getClass().getResourceAsStream(nomeArquivo);
+			if (is == null) {
+				throw new FileNotFoundException("Arquivo não encontrado: " + nomeArquivo);
+			}
+			Scanner entrada = new Scanner(is);
 			while (entrada.hasNext()) {
 				form += (entrada.nextLine() + "\n");
 			}
